@@ -1,0 +1,39 @@
+
+\section{Our System}
+
+\subsection{System Overview}\label{sec:overview}
+
+{\bf Inputs.}
+As illustrated in Fig. 1, 
+our system takes as input a static sketch drawing represented as a {\em vector graphics}, and a video sequence that contains desired motion of a moving object for the sketch. The moving object should be entirely visible throughout the video. For minimal user interaction, the video object should contain relatively rich texture and has a clear boundary against the background. Let's first assume that the user-provided sketch drawing matches the video object well in shape, so that the correspondence between image features and sketch lines exist naturally. Such sketches can be easily created with one of the video frames as reference by using previous image-guided sketching interfaces like EZ-Sketching~\cite{EZSketching:2014}. We will describe in Sec.~\ref{sec:cp_transfer} how to extend the system to handle more creative user sketches that have larger shape deviation from the video object.  
+
+{\bf Motion Representation.}
+A key question for our motion transfer task is the representation of object motion. Given the complexity of natural object motion, it is difficult to describe it using parametric forms, as similarly done in \cite{Bregler:2002}. For non-parametric representation, we could choose either dense or sparse motion flow. The former can be extracted by optical flow methods, while the latter be computed by using sparse feature tracking. 
+
+We have experimented with both representations, and concluded that sparse feature point trajectories are more suitable for our task. The reason is that dense flow often contains tracking errors that could distort the sketch during animation, and these errors are hard to correct through a user interface, given that motion is defined on every pixel. 
+On the contrary, sparse trajectories allow us to enforce strong spatial and temporal smoothness in motion, resulting in more stable animation. It further allows quick user editing by interactively moving the positions of these points. The downside of using sparse representation is that motion with finer granularity cannot be captured and transferred. This problem, however, can be partially alleviated by adjusting the spatial distribution of control points, as described in Sec.~\ref{feature_extraction}.
+
+\if 0
+\paragraph{Workflow}
+
+Our system workflow is shown in \ca{Fig.~\ref{fig:pipeline}}. 
+Given the input video and sketch drawing, our system first  extracts \hongbo{user extracts?} a series of control points that satisfy two constraints: (1) be easy to track; and (2) be semantically meaningful to guide the sketch deformation to create animation, with the user's help. We then construct an elastic graph using these points as nodes, and track their positions through the video using a novel graph tracking method that jointly considers (1) the tracking accuracy of individual nodes; and (2) the elasticity or rigidity constraints defined on edges between nodes. Given that perfect tracking could be extremely difficult for hard cases, we keep the user in the loop in the tracking process to provide additional guidance. The user can correct tracking errors on keyframes, or specify special geometric constraints between any pair of nodes. The algorithm takes into account the user inputs to produce satisfactory tracking results. 
+Finally, the tracked control points are used as guidance to a stroke-preserving mesh deformation algorithm to generate a deformed sketch on each frame, resulting the final animation. 
+We further allow the user to quickly specify local rigidity of mesh deformation for achieving more desirable results. 
+%\qingkun{However, some strokes may be distorted by the direct mesh deformation. Therefore, we allow the user to select the strokes by a local rigidity brush. Our system then reconstruct the mesh by adding more triangles which is used for keeping the shape of these strokes. Our method does not add the shape constraint to all strokes because the harder the shape constraint we give, the more motion would be lost.}
+In the following sub-sections, we will describe each of the technical components in more detail. 
+\fi
+%
+%\begin{figure}
+%	\centering
+%	\includegraphics[width=0.85\linewidth]{images/ui}
+%	\caption{}
+%	\label{fig:ui}
+%\end{figure}
+
+\input{ui}
+
+\input{pointextraction}
+\input{tracking}
+\input{motiontransfer}
+

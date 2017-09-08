@@ -1,0 +1,33 @@
+\subsection{Control Point Extraction}\label{feature_extraction}
+
+In our system, object motion is represented by a set of sparse control points which are tracked through the video, and used as constraints for deforming the sketch for animation. We have done extensive studies on automatically computing these points. 
+We have tried to use image features such as SIFT or SURF to find good points to track, and also explored determining the points based on the initial object shape. 
+In the end we conclude that although these automatic approaches do work well in some cases, they cannot handle a wide variety of examples well. This is because we have a set of strict requirements for these control points:
+\begin{enumerate}
+\item They should be sparsely distributed across the entire object shape to capture its shape characteristics.
+\item They should be easy to track in the video.  
+\item They should obey the semantics of the object, e.g., respecting semantic symmetry.
+\item Their distribution should respect the motion characteristics of the object. For example, one control point could be enough for a flying baseball; however more are needed for a fly bird to capture its wing motion. 
+\item The number of control points should be minimal for easy user adjustment.
+\end{enumerate}
+
+It is relatively easy to satisfy Requirements 1, 2 and 5, as they only require local image feature and shape analysis. However, without deep semantic understanding of the object and its motion, it is very difficult for automated algorithms to satisfy Requirements 3 and 4. 
+On the other hand, it is relatively easy for the user to preview the video and determine the semantics of the object and its motion. 
+We thus resort to a manual procedure for specifying control points. We propose a few general guidelines for doing so: (1) distribute the points sparsely to cover the whole object; (2) for symmetric object parts, specify points in roughly the same configuration; (3) place no more than 20 points for general objects. We do not explicitly ask the user to specify points that are easy to track, which is hard for the user to do. Instead we employ a robust tracking algorithm that jointly optimizes all tracking points, as detailed in the next section. 
+
+{\bf Discussion.} Note that the distribution of the control points determines the granularity of the motion we extract. Fewer control points results in coarser motion, and vice versa. However, having too many control points is also problematic, as the tracking failure would increase, and the motion field becomes less stable due to tracking errors. Given that we will enforce temporally-smooth motion fields for animation stability, we have found that a smaller set of control points (one or two dozens) is usually sufficient for a wide variety of examples. 
+
+\if 0 
+The first step of the system is to extract a set of sparse points on the sketch as ``knobs'' for deforming the sketch for animation. The position of these points are tracked through the video, so object motion is represented by their trajectories. Note that since the primary utility of these points are for controlling animation, commonly used image features such as SIFT or SURF are not desirable, as they describe only local image features rather than semantically meaningful representation of the the object shape. Furthermore, we expect the number of such points to be minimal for reduced tracking complexity and smooth sketch deformation. 
+Automatically computing such points is extremely hard, as it requires strong prior knowledge on the motion of the underlying physical object. 
+
+We first compute the object region that the control points should be extracted from. This is done by applying the active contour method~\cite{Kass88snakes} on the sketch image to produce an membrane that encloses all sketch strokes.
+Inside the object region, we find all the starting and ending points of the strokes, as well as high curvature points along each stroke. These points encode most of the topology information of the sketched object. We group them into clusters based on their spatial distances by using a simple K-Means clustering in 2D space, and use the centroid of each cluster as a control point candidate. The user can additionally move or delete these points, or adding new ones through our interface. 
+
+\ca{\sout{ The user-adjusted control points can well represent the structure of the object, but may not be optimal for tracking. To improve their trackability through the video, we apply a final adjustment step to their positions. 
+For each control point, we use the multi-level Shi-Tomasi corner detection method~\cite{Shi_1994_3266} in its vicinity to compute a local multi-level ``goodness to track'' measure, where the size of the support region in each level, denoted as $r$, is set to be $ r_0, 2r_0, 3r_0 $, with $r_0$ being the 1/10 diagonal length of the sketch bounding box. We then identify the local maximal in this multi-level local measurement map, and move the control point to it. We also record the support region size for each adjusted control point, which will be used in the tracking process. Formally, we describe the supporting image region of a control point as $C_i=\{\mathbf{x}_i, r_i\}$ (i.e., center position and size). $r_i$ is kept as a constant and we seek to determine $\mathbf{x}_i$ in each frame in the tracking process. 
+}}
+
+\qingkun{Because I only used one patch level (0.075 diagonal length of the video) in tracking part, so here we only use one patch size for point extraction.}
+
+\fi

@@ -1,0 +1,66 @@
+\documentclass[12pt,a4paper,compsoc]{article}
+%\usepackage{epsfig}
+%\usepackage{symbol_commands}
+\usepackage{graphicx}
+\usepackage{customized_commands} % hongbo's customized commands
+\usepackage{amsmath}
+\usepackage{mathrsfs}
+\usepackage{algorithm}
+\usepackage{calc}
+\usepackage{linegoal}
+\usepackage[noend]{algpseudocode}
+\makeatletter
+\def\BState{\State\hskip-\ALG@thistlm}
+\makeatother
+\newcommand*{\LongState}[1]{\State
+	\parbox[t]{\linewidth-\algorithmicindent-\algorithmicindent}{#1\strut}}
+
+\usepackage[margin=1.0in]{geometry}
+\textheight 9.2in
+\brokenpenalty=10000
+\parindent 0pt
+\parskip .5em
+
+
+\let\oldenumerate\enumerate
+\renewcommand{\enumerate}{
+	\oldenumerate
+	\setlength{\itemsep}{2pt}
+	\setlength{\parskip}{0pt}
+	\setlength{\parsep}{0pt}
+}
+
+\renewcommand{\baselinestretch}{1.0}
+
+
+%\graphicspath{{Fig/}}
+
+% =================================================================^M
+% introduce command \shortcite (defined as \cite)
+%
+\let\shortcite=\cite
+
+%\input{new-cmd-mak}
+
+%\pagestyle{empty}
+% but should number the background and methodology sections
+\begin{document}
+
+\input{abst-obj}
+
+\newpage
+
+\input{backgd}
+
+\input{method}
+
+%\clearpage
+
+%\input{figures}
+
+%\clearpage
+\newpage
+\bibliographystyle{alpha}
+\bibliography{citations_sketch}
+
+\end{document}

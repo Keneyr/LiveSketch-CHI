@@ -1,0 +1,108 @@
+\textbf{Abstract}\\
+%400 words
+Sketch animation is a popular art form that captures the living qualities of natural
+phenomena. However, it is tedious to produce even to professional artists. Users are required to create 
+appropriate spatial and temporal key frames or specify precise motion trajectories.
+
+Our tool will eliminate the needs of aboundance interactions by means of a video example.
+Videos are widely available on the Internet and are also easy to capture with mobile devices. 
+Their abundance and variety makes them a good source for providing natural and complex animations.
+With our system, animated drawings can be created by 
+extracting motions from videos and then transferring the motions to user-sketched drawings.
+While previous motion-retargetting methods typically require tedious manual input, our system will
+animate the sketch with no or few user interactions, 
+resulting in a more automatic cross-modal motion transfer.
+
+A sketch object can be segmented into meaningful parts, which may be animated with different motions. 
+The desired motion of the sketch object may also be temporally segmented and animated separately.
+In such cases, extracted motions can be re-used.
+The issue of smooth transition between the different motion trajectories therefore will also need to 
+be addressed.  Animating multiple objects adds more complexity to the problem.
+
+We will evaluate our system among novice users and artists. 
+It will consist of two parts, which evaluates the usability for the two kinds of users,
+and the quality of our work compared with existing animation tools.
+Long-term impact.
+
+\textbf{Objectives}\\
+
+Animations are tedious to produce even for professional artists as 
+appropriate spatial and temporal keyframes need to be carefully drawn or 
+motion trajectories need to be precisely specified with many interactions.
+This project aims at providing an easy-to-use tool for novice users to 
+produce natural sketch animation with no or few simple iterations. 
+
+In recent years, there have been tools and techniques proposed that aim at improving the efficiency of 
+animation creation using keyframes or motion trajectory. One way is using the temporal coherence to estimate the next 
+key frame to draw, however this still requires users to have significant expertise and involve tedious
+manual labor when animation is complex. Another way is to provide interactive techniques that aid the specification
+of the motion trajectories. However, it is often difficult to maintain spatial consistency among multiple 
+trajectories. In this project, we therefore aim to provide an animation tool that relieve the users of
+tedious manual operations on keyframes and is capable of producing animation with complex non-rigid 
+object deformation.
+
+This is a joint project with Jue Wang and Xue Bai of Adobe Research, inspired by one of their previous work 
+with my PhD student Qingkun Su.  Their EZ-Sketching tool assists novice users to sketch with the assistance of
+of an image.  In this project, we will develop new tool to assist users animate their drawings by a 
+given video. Rather than drawing tedious sketch keyframes or specifying complex motion trajectories 
+manually, the user is only required to sketch an object and upload a video of an object in a desired motion.
+
+Video-to-sketch cross-model motion transfer basically involves three sub-problems.  
+The first problem is aligning the sketch object we want to animate with the object in the video.
+More specifically, matching points on the sketch object with points on the video object that have the 
+desired corresponding motion trajectories.  The second problem is tracking the movement of these points in
+the video to extract their motion trajectories. The third problem is transfering the extracted motion trajectories
+to the corresponding points on the sketch.  
+
+%feature extraction and alignment, which aims to extract good feature points to track the video and 
+%good control points to animate the sketch and align them.  Next, the motion 
+%is extracted from the video by tracking the good feature points respecting the object structure. 
+%We will need a structure-preserving tracking method that enable 
+%accurate tracking of deformable objects, as well as addresses occlusion and drifting problems. With the 
+%aligned correspondence and the extracted motion, the last step is to transfer the motion to the sketch. 
+%For this purpose, we will devise a stroke-preserving ARAP mesh deformation method, which will greatly 
+%reduce distortion of the strokes.
+
+%The non-rigid matching between sketch and video is challenging. 
+%Existing feature extraction methods like [ST94] can determine good features for tracking. 
+%However, the 
+%features may not work well for animation transfer. Some feature points may have no 
+%corresponding part in the sketch. 
+%Therefore, we will propose a method to extract features of sketch and video and their correspondence, which 
+%both satisfy user’s interest and are compatible of non-rigid matching cases. 
+%This method makes sure that the structure is kept during tracking and that the animation result always 
+%looks reasonable.
+
+The alignment problem basically involves matching two sets of feature points, detected from the sketch and one 
+video frame.  As animating the sketch is the user's key interest, the feature points of the sketch ...play primary
+role? 
+to provide, flexibility needs interaction
+
+
+The motion extraction task needs to address the challenge of tracking deformable objects,
+possibly with self-occlusion and ambiguity of corresponding points in next frame.
+Instability in tracking can bring about animation distortion when some points drift and break 
+the object's global structure. It is therefore essential to ensure object structure consistency during tracking.
+Points that do not violate object structure will be tracked first. Drifting points are detected and their 
+positions are interpolated later spatially and temporally.
+
+%It first detects whether the feature points are drifting using a structure graph. Their positions of drifting points
+%can be estimated from their spatial neighbors in the graph and temporal neighbors on their trajectories.
+
+The motion transfer problem needs to address how to deform the sketch but preserving the stroke shapes as rigidly
+as possible.
+
+\ca{We also propose to extend our work with two applications. The first one is motion transfer from two or more videos to a single sketch. The motion can be applied to different parts of the sketch or in different time slots. We propose methods that can keep spatial consistency among parts and smooth transition during the motion gaps in time space.
+	Another application is interactive and dynamic animation creation. It would allow user to control the animation by specifying the motion direction or speed by dragging. It can also produce dynamic animations by giving dynamic external force like wind.}
+%However, it would produce stroke distortion because of not considering the stroke 
+%shape information. We propose a stroke preserving method, which is realized by
+%adding two triangle sets to the original mesh. One triangle set is to preserve the shape of the strokes and the other one is to transfer the deformation from the original mesh to the strokes.
+%As-rigid-as-possible (ARAP) mesh deformation method has been widely used in 2D and 3D shape 
+%deformation applications. We can construct a mesh and deform the sketch through the mesh 
+
+Objectives:\\
+1. Design an intuitive user interface for sketching and animation creation;\\
+2. Design a feature extraction method that both meets user’s interest and is compatible for non-rigid matching; \\
+3. Design a structure-preserving tracking method that enable distortion-free motion transfer;\\
+4. Design a shape-preserving deformation method for deforming the strokes;\\
+5. Investigate other animation extensions such as animation stylization, and animation scenes with numerous objects.

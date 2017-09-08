@@ -1,0 +1,83 @@
+%The main approach to free-form motion design is keyframing: character
+%poses at specific times are interpolated to produce motion.
+\textbf{Background of Research}
+
+\textbf{(A) Work Done by Others}
+
+\textbf{Digital sketching tools.} There has been extensive research on how to assist artists or novice users on creating sketches. 
+Some methods refine or guide users' sketching by analyzing a crowdsourced set of  images~\cite{Lee:2011} or low quality drawings~\cite{Gingold:2012}. EZ-Sketching~\cite{EZSketching:2014} improves the sketching quality aided by only a single image.  
+It uses a tracing paradigm and automatically corrects sketch lines that are roughly traced over an image 
+by analyzing and utilizing the image features being traced. 
+%Sketch lines roughly traced over an image are automatically corrected by a three-level optimization process. 
+Xing et al.~\cite{Xing:2014} presents a painting system that auto-completes tedious repetitions. These methods focus on assisting the users to produce individual static drawings. Animations, on the other hand, rely heavily on the user's sense of space and time~\cite{Sohn:2012,Benard:2013}. Our system aims to relieve the users from the tedious control required for animation by making use of video examples.
+
+{\textbf{Sketch-based animation tools.} Several animation tools with intuitive interaction techniques have been proposed in recent years. A common objective 
+is to develop tools that aid the interactive specification of motion 
+trajectories.  Thorne et al.~\cite{Thorne:2004} present a set of cursive gestures for sketching a significant 
+variety of motions for 2D characters.
+%Their interface, Motion doodles, interprets motion sketches on the fly to yield interactive animated motions.
+Guay et al.~\cite{Guay:2015} introduced a space-time sketching concept that enables animators to create a movement, including shape deformation over time, by sketching only a single stroke.
+Other techniques use predefined motion effects (particle, waves, smoke, etc.) to animate 2D static 
+drawings~\cite{Kazi:2014,Xing:2016}. These methods focus on 
+specific animation effects or a small number of animation styles. 
+Other methods aim at interactively predicting what users might sketch next using temporal 
+coherence~\cite{Wang:2004,Agarwala:2004,Xing:2015}. 
+But they still require many manual sketching operations for each keyframe.
+%\cite{Xing:2015} analyzes all past sketches to predict what the user might sketch next with temporal coherence. 
+Unlike these methods, our \textit{LiveSketch} will be able to generate complex non-rigid deformation for a static sketch with no or few interactions by using the motions from videos.
+}
+
+
+\textbf{Animation tools using video.} There have been animation tools proposed that utilize videos since videos can 
+provide abundant motions.  Ben-Zvi et al.~\cite{ben2015line} propose a data-driven method that automatically converts videos and CG animations to stylized animated 
+line drawings.  They maintain temporal coherence by using constrained optimization to build correspondence between tracked points and creating smooth time sheets. 
+Kyprianidis et al.~\cite{Kyprianidis:2013} survey non-photorealistic techniques that transform images and video into artistically stylized renderings.
+These methods, however, often provide limited artistic controls. 
+Animations can also be created by tracking a contour of an object in the video and using its temporally coherent information.
+Bregler et al.~\cite{Bregler:2002} track the motion from traditionally animated cartoons and retarget it onto 3D models or 2D drawings. 
+Agarwala et al.~\cite{Agarwala:2004} propose an approach that combines computer vision with user interaction to track contours in video. 
+Since these methods require the contour and image edges to be well aligned, tedious manually operations are required to correct the sketch position at the keyframes. 
+In our method, all the interactions are completed in one frame. Instead of using image edge feature, 
+our method tracks key points of the sketch, allowing freeform sketch input.
+
+%Kyprianidis: focusing on non-photorealistic techniques for transforming 2D input (images and video) into artistically stylized renderings
+%. First, the fusion of higher level computer vision and NPR, illustrating the trends toward scene analysis to drive artistic
+%abstraction and diversity of style. Second, the evolution of local processing approaches toward edge-aware filtering for real-time
+%stylization of images and video. 
+
+%\textbf{Motion retargeting techniques.} Motion retargeting aims to transfer the motion from one source to another. It usually focuses on specific class by using existing motion or predefined tracking model, such as character, fluid, animal gaits, face, etc. Our system is proposed to transfer the extract motion from the non-rigid deformed object in a video to a sketch and they can belong to any class and be different.
+
+\textbf{(B) Work Done by Us}
+
+Our research group has extensive research experience in the areas of digital art tools, image analysis and interaction techniques.  We developed
+a painting system that enables expressive strokes~\cite{Chu2004} and realistic ink
+dispersion~\cite{Chu2005}, redefining natural-media painting in the field of computer graphics.
+We presented a multi-phase drawing framework and the concept of sketching entropy to simulate the process of 
+observational drawing~\cite{Liu2014}.
+Our work in image analysis started with image resizing.
+We formulated an efficient nonlinear optimization that iteratively computes optimal local scaling factors for each region to enable preservation of visually prominent features
+~\cite{Wang2008}. 
+%Two years ago, my PhD student Qingkun Su collaborated with Jue Wang of Adobe Research and my former student Hongbo Fu of City University of Hong Kong to develop 
+%\textit{EZ-Sketching}~\cite{EZSketching:2014}. 
+%It uses a tracing paradigm and automatically corrects sketch lines that are roughly traced over an image 
+%by analyzing and utilizing the image features being traced. 
+In image-based 3D modeling, we investigated regularization of building models recosntructed from stereo-based methods.  Utilizing structure information provided by user's sketches over the images, 
+our system coanalysizes the initial mesh and the images to extract a structure, which maintains regularization during mesh simplification~\cite{Wang:2016}. 
+
+User interface design and interactive techniques is another of our research focus.
+For constrained manipulations of 3D objects,
+we presented touch gestures
+that rely on a single touch action that simultaneously
+specifies a transformation-type, axis constraint and magnitude while applying the transformation to an object
+~\cite{Au2012}. 
+%To support one-hand usage, we designed 
+%two-contact-points gestures to perform full six degrees-of-freedom
+%manipulations~\cite{Liu2012}.
+Later, we developed 
+{\em Lazy Selection}, a selection tool that is tolerant to imprecise input for 
+quick selection of shape elements~\cite{Xu2012}.
+More recently, we designed 
+group-aware commands for interactive alignment and distribution of graphic
+elements~\cite{Xu2015} and developed a 
+framework for beautification of 2D layouts with interactive ambiguity resolution~\cite{Xu2014}.
+Lastly, we presented \textit{2D-Dragger}~\cite{Su:2016}, which is a unified touch-based target acquisition technique that enables easy access to small targets in dense regions or distant targets on screens of various sizes. 

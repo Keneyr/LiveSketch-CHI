@@ -1,0 +1,104 @@
+{\bf Live Sketch: Animating Static Drawings using Video Examples} 
+
+\textbf{Abstract}\\
+%400 words
+
+Animation drawing is a popular art form that captures the living qualities of surrounding phenomena. However, it is usually tedious to produce even for professional artists. Users are required to create appropriate spatial and temporal key frames carefully or specify the motion trajectory with many interactions. 
+ 
+This project aims at to provide a friendly animation tool for novice users to produce natural results with no or only few simple iterations. Different with previous animation tools that requires many interactions to define the animation, our tool is by means of video examples.  Video is very common in the Internet and easy to capture by mobile device. Due to its abundance and variety could be capable to provide natural and complex animations. Our new system helps novice users create animated drawings by (1) sketching over the first frame; and (2) extracting and transferring motion from the underlying video to the drawing. While previous motion retargeting methods usually require tedious manual input, we developed more automated approaches to animate the sketch with no or few user interactions, resulting in more automatic cross-modal motion transfer.
+
+The automatic part is comprised of three steps.
+Given the sketch and the video, the first step is feature extraction and alignment, which aims to extract some good feature points to track the video while respecting to user's interest.
+Then we extract the motion by tracking the good feature points of the video by using object structure. Our structure-preserving tracking method would not only improve the tracking accuracy for deformable object, but also produce reasonable results when the occlusion or drifting problems occur. 
+Combined with the correspondence and the extracted motion, the last step is transferring the motion to the sketch using a stroke-preserving ARAP mesh deformation method, which greatly reduces the distortion of the strokes.
+
+After the implementation of our system, we will do an evaluation among novice users and artists. It consists of two parts, which evaluates the usability for the two kinds of users, and the quality of our work compared with existing animation tools.
+
+%find the tracking features and sketch-image correspondence
+%In recent years, there are many tools and techniques improving the efficiency and quality of animation creation by keyframe interpolation, interaction techniques to specify the motion trajectory or textures, or non-photorealistic rendering of video or 3D animation. 
+
+%It mainly contains three steps: sketch and video alignment, motion extraction and motion transfer. The main contributions for each step is
+%\begin{itemize}
+%	\item Combining the information of video and sketch, our method could extract the good feature that both good to track and good to control the drawing's deformation.
+%	\item We proposed a structure preserving method that could alway keep the structure of the tracking object even some parts drift during tracking. This feature could guarantee that our method is impossible to produce animation with large distortion.
+%	\item Previous as rigid as possible mesh deformation could not preserve the stroke shape during the mesh deformation. We provide a stroke-preserving method that could avoid the stroke's distortion.
+%\end{itemize}
+
+%Conceptual design ideas are typically communicated between different parties via 2D sketches as drawing is quick and natural.  However, the design process is often iterative, requiring feedback from collaborators or clients and making necessary refinements.  3D visualization of the intermediate design product eliminates ambiguities and clarifies doubts.  Feedbacks by sketching over visualized 3D intermediate product would greatly enhance the effectiveness of communication.
+%
+%The goal of this project is to design and develop a system that allows the user to sketch over a projected view of an existing 3D model, with the aim of indicating modifications to the 3D model. The system will automatically convert the 2D strokes to 3D ones. The user can then rotate the model together with the constructed 3D strokes and continue to add modification strokes. The sketched strokes and their converted 3D counterparts are automatically beautified to meet the user's expectation.
+%
+%The main challenge of the 3D stroke conversion problem lies in detecting the canvas plane on which the user is drawing the current set of strokes. We solve this problem by finding relationsships between the input strokes and projected linear features of the existing shape, such as creases, dominant normals, and skeletons.  The system identifies three types of relationships, namely, continuity, collinearity and parallelism and presents to the user the 3D conversion that preserves the most relations. 
+%%All other possible conversions will be ranked and displayed for the user can to choose if wishes.
+%
+%We will evaluate the system by conducting a user study. An experiment will be designed to compare our system with an interface that requires the user to explicitly specify the canvas plane to be drawn. Participants will also be asked to answer a questionnaire in a usability study.
+\newpage
+\textbf{Long-term Impact Objectives}\\
+%800 words
+
+Animation drawing is a popular art form that captures the living qualities of surrounding phenomena. However, it is usually tedious to produce even for professional artists. Users are required to create appropriate spatial and temporal key frames when using existing professional tools. 
+
+In recent years, there are some tools and techniques aiming to improve the efficiency of animation creation by using key frames or motion trajectory. One way is using the temporal coherence to estimate the next key frame to draw, but it still requires users to have significant expertise and manual labor when animation is complex. Another method is interactively specifying the motion trajectories of the object. However, it is usually hard to maintain spatial consistency for multiple complex trajectories. Therefore, we aim to provide an animation tool which not only does not require tedious manual operations on key frames but is capable to create animation with complex non-rigid object deformation.
+
+Inspired by EZ-Sketching~\cite{EZSketching:2014}, which assists user's sketching by external assistance of image, we present a new tool to help novice users animate their drawings by a given video. Rather than drawing tedious sketch key frames or specifying complex motion trajectories manually, the user is only required to give one sketch and one video. Our tool would transfer the motion from the video to the sketch automatically or with few operations. It mainly contains three steps fully automatically {where might need interactions}. 
+Given a sketch and a video, the first step is feature extraction and alignment, which aims to extract good feature points to track the video and good control points to manipulate the sketch. 
+Next, the motion is extracted by tracking the good feature points of the video respecting the object structure.
+We will design a structure-preserving tracking method that not only improves the tracking accuracy for deformable objects, but also addresses occlusion and drifting problems.
+With the aligned correspondence and the extracted motion, the last step is to transfer the motion to the sketch.
+For this purpose, we will devise a stroke-preserving ARAP mesh deformation method, which will greatly reduce distortion of the strokes.
+
+Existing feature extraction methods like~\cite{Shi:1994} can produce good features for tracking. However, the features may not good for animation transfer. The first reason is that some feature points may have no corresponding part in the sketch. The second one is that it is a non-rigid matching between sketch and video. Therefore, we will propose a method to extract features of sketch and video and their correspondence, which both satisfy user's interest and are compatible of non-rigid matching cases. This method makes sure that the structure is kept during the tracking and animation result always looks reasonable.
+
+Drifting problem is critical in traditional object tracking areas since occlusion and ambiguity is very common in videos. It can brings in animation distortion when some points are drifting and break the global structure. We propose a two-step structure preserving method to solve the problem, detection and correction, based on a structure graph. It first detect if the feature points are drifting using the graph. When the drifting points are detected, their positions can be estimated by their spatial neighbors in the graph and temporal neighbors on their trajectories.
+
+As-rigid-as-possible (ARAP) mesh deformation method has been widely used in 2D and 3D shape deformation applications. We can construct a mesh and deform the sketch through the mesh deformation. However, it would produce stroke distortion because of not considering the stroke shape information. We propose a stroke preserving method, which is realized by adding two triangle sets to the original mesh. One triangle set is to preserve the shape of the strokes and the other one is to transfer the deformation from the original mesh to the strokes.
+
+
+Objectives:
+
+1. Design an intuitive user interface for sketch and animation creation;
+
+2. Design a feature extraction method which both satisfies user's interest and is compatible of non-rigid matching cases;
+
+3. Design a structure preserving tracking method that could avoid animation distortion after motion transfer;
+
+4. Design a stroke shape preserving deformation method so that the shape of the strokes is kept in the ARAP mesh deformation;
+
+5. Investigate other animation extensions such as animation stylization, and the animation scene containing numerous objects.
+%The main contributions for each step is
+%\begin{itemize}
+%	\item Combining the information of video and sketch, our method could extract the good feature that both good to track and good to control the drawing's deformation.
+%	\item We proposed a structure preserving method that could alway keep the structure of the tracking object even some parts drift during tracking. This feature could guarantee that our method is impossible to produce animation with large distortion.
+%	\item Previous as rigid as possible mesh deformation could not preserve the stroke shape during the mesh deformation. We provide a stroke-preserving method that could avoid the stroke's distortion.
+%\end{itemize}
+
+%
+%Designing 3D models or scene is a fundamental task in many graphics applications, including games, movies and product design. 
+%This process requires well-trained artists to build 3D models using professional software to communicate with designers or clients. 
+%Typically, the design process is iterative, seeking feedback from collaborators and clients and refining the models accordingly. 
+%Effective communication is necessary to reduce the production process.
+%
+%Communication through textural description is imprecise and mis-interpretation easily arises. A visual illustration is always more effective in communicating conceptual design ideas.  3D illustrations are even more desirable to convey the clients' requirements to the artists. However clients are often non-experts in using modeling software.  Sketching is a simple and efficient means for expressing ideas and almost everyone can draw an understandable sketch without any training. Many 3D modeling software packages provide sketching tools (e.g., grease pencil in Blender) to sketch in 3D. However, these tools are inaccessible to nonprofessionals as they still require the users to determine the 3D position of each stroke carefully. 
+%
+%In this project we will develop a novel 3D sketching system to enable novice users to add 3D strokes to an existing 3D model or scene easily in order to communicate design ideas. Leveraging the geometric information of the existing 3D model, our system will automatically convert 2D sketch strokes to 3D strokes. The system is easy to use and thus will be a suitable tool for nonprofessionals to express conceptual ideas.
+%
+%The user will draw a sketch over a 3D model using any 2D input device, such as mouse, stylus or touch screen. Our system adopts an incremental interface. Each time, the user draws several strokes intended to be on a common plane and the system will automatically determine the canvas plane based on relations between the strokes and the geometric features of the model. The drawn strokes may have multiple reasonable interpretations, which will be ranked according to their likelihood of being the user's intention.
+%
+%Geometric features will be extracted via shape understanding algorithms. Useful shape information, including sharp edges, dominant faces, dominant normals and skeletons, will be extracted from the model as well as from the partially constructed 3D sketch.  The input strokes are matched with the extracted shape features to determine how to convert the current set of 2D strokes into a 3D version. Matching is carried out with shape features projected to screen space.  
+%This approach is motivated by the observation that when a user draws a 2D stroke, although the model and the drawn strokes are perceived in 3D, their projected 2D information is used as the reference. Therefore matching in screen space is more reliable. 
+%
+%Once the canvas plane is determined, we will project the drawn strokes to the plane to obtain the 3D strokes. Since the 2D strokes are only drawn roughly, the projected 3D strokes may deviate from the desired position. Post-processing is necessary to produce a more satisfactory 3D sketch. 
+%This beautification process will be realized via an optimization approach that beautifies the 2D strokes so that their projected 3D counterparts meet the user's expectations better.
+%
+%Objectives:
+%
+%1. Design a simple and effective interface for adding sketch strokes to an existing model or scene.
+%
+%2. Extract useful geometric information from the model and partially constructed 3D sketch, which will be used to determine the canvas plane on which the user draws strokes.
+%Explore the relationships between the 2D strokes and the 3D shape to find out how to convert 2D strokes into 3D.
+%
+%3. Beautify the 2D strokes so that the projected 3D strokes meets the user's expectations better.
+%
+%4. Perform a user study to evaluate the system.
+%
+%5. Investigate further extensions of the system.

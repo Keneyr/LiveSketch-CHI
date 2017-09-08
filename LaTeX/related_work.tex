@@ -1,0 +1,77 @@
+\section{Related Work}
+
+%The main approach to free-form motion design is keyframing: character
+%poses at specific times are interpolated to produce motion.
+
+\textbf{Digital sketching.} There has been extensive research on how to assist artists or novice users in creating sketches. 
+Some methods refine or guide users' sketching by analyzing a crowdsourced set of  images~\cite{Lee:2011}, low-quality drawings~\cite{Gingold:2012}, or even a single image being traced over~\cite{EZSketching:2014}. %improves the sketching quality aided by only a single image.  
+%It uses a tracing paradigm and automatically corrects sketch lines that are roughly traced over an image 
+%by analyzing and utilizing the image features being traced. 
+Xing et al.~\shortcite{Xing:2014} present a painting system that auto-completes tedious repetitions. These methods have focused on assisting users in producing individual static drawings. Animations, on the other hand, rely heavily on users' sense of both space and time~\cite{Sohn:2012,Benard:2013}. Our system aims to relieve users from the tedious control required of motion authoring by making use of video examples.
+
+%\ %---------------------------------------REMOVE LATER------------------------------------------
+
+{\textbf{Sketch-based animation.} Several animation tools with intuitive interaction techniques have been proposed in recent years. A common objective 
+	is to develop tools that aid interactive specification of motion 
+	trajectories.  Thorne et al.~\shortcite{Thorne:2004} present a set of cursive gestures for sketching a significant 
+	variety of motions for 2D characters.
+	%Their interface, Motion doodles, interprets motion sketches on the fly to yield interactive animated motions.
+	Guay et al.~\shortcite{Guay:2015} introduce a space-time sketching concept that enables animators to create a movement, including shape deformation over time, by sketching only a single stroke.
+	Other techniques use predefined motion effects (particle, waves, smoke, etc.) to animate 2D static 
+	drawings~\cite{Kazi:2014,Xing:2016}. These methods focus on 
+	specific animation effects or a small number of animation styles. 
+	Other methods aim at interactively predicting what users might sketch next using temporal 
+	coherence~\cite{Wang:2004,Agarwala:2004,Xing:2015}. 
+	But they still require many manual sketching operations for each keyframe.
+	%\cite{Xing:2015} analyzes all past sketches to predict what the user might sketch next with temporal coherence. 
+	Unlike these methods, our \textit{Live Sketch} is able to generate complex non-rigid deformation for a static sketch by retargeting motions from videos with a small amount of user assistance.
+}
+
+
+\textbf{Animation tools using video.} There have been existing tools that also utilize videos for animation creation, as videos provide abundant motion. For example, Ben-Zvi et al.~\shortcite{ben2015line} develop a data-driven method that automatically converts videos and CG animations to stylized animated 
+line drawings.  %They maintain temporal coherence by using constrained optimization to build correspondence between tracked points and creating smooth time sheets. 
+Kyprianidis et al.~\shortcite{Kyprianidis:2013} survey non-photorealistic rendering techniques that transform images and videos into artistically stylized renderings.
+These methods focus on changing the rendering styles of input videos instead of extracting the underlying motion for animating new line drawings. 
+
+Animations can also be created by tracking a contour of an object in the video and using its temporally coherent information.
+For instance, Bregler et al.~\shortcite{Bregler:2002} track the motion from traditionally animated cartoons and retarget it onto 3D models or 2D drawings.
+It takes a keyframe-based approach and requires series of corresponding input and output key shapes for deformation interpolation. In contrast, we take non-keyframe-based approaches to require only a single static drawing as input, which is easier to prepare.
+Their method further requires a sub-part decomposition procedure, which is relatively easy for cartoon characters but is hard for real video objects. 
+% It parameterizes cartoon character motion into global affine transformation and a series of input key shapes as deformation basis, which are picked by the user. However, given the complexity of real-world object motion, it is unclear how to intuitively construct the key shapes. 
+Agarwala et al.~\shortcite{Agarwala:2004} present a rotoscoping approach that uses computer vision techniques to reduce user interaction in the contour-tracking process. 
+The extracted contours from this system can be used to drive user sketches for video stylization. 
+Our system uses sparse control points as motion representation, which are much easier to track accurately than contours, and thus requires much less computation and user intervention in the tracking process.
+
+\textbf{Face and body driven animation.} 
+Our system is closely related to automated human-performance-driven animation. 
+MoCap~\cite{Kitagawa:2008} is the industry standard for capturing 3D human pose for animation. It requires complicated hardware setup that is not easily accessible to normal users. 
+Fitting 3D face or body models to images and videos to extract human motion has been extensively studied~\cite{Chen:2012,Cao:2013,thies2016face,posemachine,Reinert:2016}. It has enabled new real-time face- or body-driven animation systems such as Adobe Character Animator. 
+Park et al.~\shortcite{Park:2006} directly synthesize human motion in video by analyzing exemplars.
+However, these systems are limited to facial expression or body motion only. In contrast, our system is designed as a general animation tool that can handle a wide range of objects. Furthermore, it uses a regular video as motion source, which is relatively easy to capture and vastly available online. 
+
+\textbf{Cross-modality motion retargeting.}
+Many systems have been proposed to transfer motion across different modalities. 
+Hornung et al.~\shortcite{Hornung:2007} transfer 3D motion data to 2D image objects. 
+Diener et al.~\shortcite{diener:inria-00389326} retarget 2D motion fields for the animation
+of 3D plant models.
+Zhou et al.~\shortcite{Zhou:2005} propose to use the volumetric graph Laplacian for large 3D mesh deformation, allowing motion to be transferred from exaggerated 2D animations to 3D meshes.
+Our system is a pure 2D system, and thus is applicable even when 3D models are not available.
+
+\textbf{Video tracking.}
+Previous single object tracking methods~\cite{Martinez:2008,Artner:2011,Cehovin:2013,Cai:2014} often utilize weak local features of sampled patches to track a single object at the bounding box level. 
+The box position is determined from all patches through a voting or statistical aggregation method. Our application however requires more than a bounding box; it requires tracking sparse control points to capture major structural deformation. 
+
+Sparse feature tracking is a fundamental component for video analysis that has been extensively studied in the computer vision literature.
+Our tracking method is built upon well-known tracking techniques such as good-feature-to-track~\cite{Shi_1994_3266} and Struck~\cite{6126251}. However, most previous tracking methods track each feature point individually without considering their geometrical relationships. This is valid for most computer vision tasks where hundreds of features are being tracked on each frame, and tracking errors are eliminated by outlier removal methods such as RANSAC. However, since we only track a few semantically-meaningful control points, tracking failure of a single point would result in large distortion.
+This problem is alleviated by our new motion extraction method. 
+%\hongbo{In-betweening techniques can also be briefly discussed:
+%Re-using traditional animation: methods for semi-automatic segmentation and inbetweening;
+%Betweenit: An interactive tool for tight inbetweening}
+
+
+%Kyprianidis: focusing on non-photorealistic techniques for transforming 2D input (images and video) into artistically stylized renderings
+%. First, the fusion of higher level computer vision and NPR, illustrating the trends toward scene analysis to drive artistic
+%abstraction and diversity of style. Second, the evolution of local processing approaches toward edge-aware filtering for real-time
+%stylization of images and video. 
+
+%\textbf{Motion retargeting techniques.} Motion retargeting aims to transfer the motion from one source to another. It usually focuses on specific class by using existing motion or predefined tracking model, such as character, fluid, animal gaits, face, etc. Our system is proposed to transfer the extract motion from the non-rigid deformed object in a video to a sketch and they can belong to any class and be different.

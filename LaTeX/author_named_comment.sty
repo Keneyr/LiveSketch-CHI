@@ -1,0 +1,21 @@
+% --------------------------------------------------------------------------
+% Author: Hongbo Fu
+% E-mail: fuplus@gmail.com
+% Feel free to contact me if you have any comments or suggestions
+% --------------------------------------------------------------------------
+
+\usepackage{color_names}
+
+% customized style
+\newcommand{\AuthorNamedCommentStyle}{\color{Red} \bf \em}
+
+% --------------------------------------------------------------------------
+% define author/reviewer ids
+% Syntax: \newcommand{\peter}{{\AuthorNamedCommentStyle [Peter says: #1]}}
+% Usage: in the main LaTeX file, use \peter{Hello world!} to display "[Peter says: Hello world!]"
+% --------------------------------------------------------------------------
+\newcommand{\hongbo}[1]{{\AuthorNamedCommentStyle\bf \em   [Hongbo: #1]}}
+\newcommand{\jue}[1]{{\color{Green} \bf \em [Jue: #1]}}
+\newcommand{\xue}[1]{{\color{Purple} \bf \em   [Xue: #1]}}
+\newcommand{\Tai}[1]{{\color{Magenta} \bf \em   [Tai: #1]}}
+\newcommand{\qingkun}[1]{{\color{MidnightBlue} \bf \em   [Qingkun: #1]}}

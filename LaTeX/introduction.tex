@@ -1,0 +1,33 @@
+\section{Introduction}
+
+In recent years, there has been a new wave of research on developing intelligent user interfaces to help novice users create 
+artistically expressive sketches and drawings.  Representative examples include \emph{ShadowDraw}~\cite{Lee:2011}, \emph{EZ-Sketch}~\cite{EZSketching:2014}, \emph{ColorSketch}~\cite{Li:2017}, and the repetition autocompletion system~\cite{Xing:2014}. By combining intelligent computational algorithms with intuitive UI controls, these systems enable novice users with little or no formal artistic training to create high quality drawings with minimal user effort, which otherwise cannot be achieved using traditional tools. 
+
+
+
+Despite the fact that creating static drawings has been made easier by these tools, creating high-quality 2D animations still remains both difficult and time-consuming.
+Traditional animation tools, such as \emph{Adobe Flash} and \emph{Toon Boom} software, require accurate motion keyframing, which is a tedious and labor-intensive process even for experienced artists.
+To avoid this, new interactive tools have been proposed to allow artists to specify motion in more creative ways, such as spatio-temporal sketching~\cite{Guay:2015}, or using specially-designed cursive gestures~\cite{Thorne:2004}. Still, using these tools requires not only intensive training, but also  {animation skills} that novice users do not possess.  
+Specifically, without intensive training and practice, it is very hard for novice users to mentally map desired continuous object motion to static keyframe drawings that are discrete and sparse.  
+
+
+In this paper, we present {\em Live Sketch}, a new intelligent interface to assist users to create convincing 2D animation from static drawings using corresponding video examples, as illustrated in Fig.~\ref{fig:teaser}. 
+Our main idea  is to extract and transfer object motion from an existing video to a static drawing to animate the character, instead of manual motion specification in the traditional animation workflow. 
+The object motion is represented by a sparse set of control points (Fig.~\ref{fig:teaser} (b)) for animation stability and easy user control.
+We propose new computational algorithms and combine them with intuitive user controls for robust and controllable motion extraction and transfer.
+The main advantage of our system is twofold. First, it enables users with no or little animation 
+skills to create animation in an easy-to-control workflow, even for complex non-rigid object motion with self-occlusion. Second, by using semi-automatic tracking and deformation methods, this approach requires much less user interaction compared with traditional tools, and thus can be used for quick prototyping for professionals. 
+
+We address a few major technical challenges using semi-automatic solutions. We  propose a new video tracking approach, which is able to track complex non-rigid object motion and is robust against occlusion and ambiguity. It takes a minimal set of user-specified, semantically-meaningful control points on the first frame, and automatically tracks their positions throughout the video. 
+This approach can also incorporate sparse user edits as hard constraints to refine the tracking results in difficult cases. 
+In the animation stage, we use mesh-based deformation guided by the tracking results (Fig.~\ref{fig:teaser} (e)) to automatically animate an input sketch, while providing users a set of tools to fine-tune the animation, for instance controlling the local rigidity of the motion. 
+We further show how to interactively decompose a sketch into multiple layers to handle complex object motion patterns, such as self-occlusion and topology change. We have evaluated the usability of our system and its support for creativity via a pilot study, leading to very positive results.
+
+
+Our work presents the following main contributions:
+\begin{itemize}
+\item The first general, efficient, and user-friendly 2D animation tool that transfers 2D motion from videos to static drawings.
+\item A new sparse point tracking method that is robust against occlusion and ambiguity, and allows easy user control (Sec.~\ref{sec:motion_extraction}).
+\item A new stroke-preserving mesh deformation method for animating sketch drawings (Sec.~\ref{motion_transfer}).
+%\item A set of easy-to-use user tools for fine-tuning the animation (Sec.~\ref{sec:ui}). 
+\end{itemize}
